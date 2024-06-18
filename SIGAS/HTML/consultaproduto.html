@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <!-- Usando um link absoluto para o arquivo de ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Produto</title>
+</head>
+
+<body>
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown">Consulta de Produtos</li>
+    </ul>
+  </nav>
+
+  <form id="consultaProduto" onsubmit="return false;">
+    <div class="form-group">
+      <label for="consultaIdProduto">ID Produto:</label>
+      <input type="text" id="consultaIdProduto" name="consultaIdProduto">
+    </div>
+    <div class="form-group">
+      <label for="consultaNomeProduto">Nome:</label>
+      <input type="text" id="consultaNomeProduto" name="consultaNomeProduto">
+    </div>
+    <div class="button-group">
+      <button type="button" class="search" onclick="consultarProduto()">Pesquisar</button>
+    </div>
+    <div class="button-group">
+        <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+    </div>
+  </form>
+
+  <div id="resultadoConsulta">
+    <h3>Resultado da Consulta</h3>
+    <div id="produtoInfo"></div>
+  </div>
+
+  <script>
+    // Função para consultar o produto (mock data)
+    function consultarProduto() {
+      const idProduto = document.getElementById('consultaIdProduto').value;
+      const nome = document.getElementById('consultaNomeProduto').value;
+      let produtoInfo = document.getElementById('produtoInfo');
+
+      // Mock data de produtos
+      const produtos = [
+        {
+          id: '1',
+          nome: 'Produto A',
+          descricao: 'Descrição do Produto A',
+          preco: 'R$ 100,00',
+          estoque: '50'
+        },
+        {
+          id: '2',
+          nome: 'Produto B',
+          descricao: 'Descrição do Produto B',
+          preco: 'R$ 200,00',
+          estoque: '30'
+        }
+      ];
+
+      // Filtrar produtos com base no ID ou nome
+      const produto = produtos.find(p => p.id === idProduto || p.nome.toLowerCase() === nome.toLowerCase());
+
+      // Exibir informações do produto encontrado ou mensagem de erro
+      if (produto) {
+        produtoInfo.innerHTML = `
+          <p>ID: ${produto.id}</p>
+          <p>Nome: ${produto.nome}</p>
+          <p>Descrição: ${produto.descricao}</p>
+          <p>Preço: ${produto.preco}</p>
+          <p>Estoque: ${produto.estoque}</p>
+        `;
+      } else {
+        produtoInfo.innerHTML = '<p>Produto não encontrado.</p>';
+      }
+    }
+  </script>
+</body>
+
+</html>

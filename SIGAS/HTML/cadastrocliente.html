@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <!-- Usando um link absoluto para o arquivo de ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Cliente</title>
+</head>
+
+<body>
+    <nav id="cabecalho">
+      <ul>
+        <li class="dropdown"> Cadastro de Clientes </li>
+      </ul>
+    </nav>
+
+
+    <form id="cadastroCliente">
+      <div class="form-group">
+        <label for="idCliente">ID Cliente:</label>
+        <input type="text" id="idCliente" name="idCliente" readonly>
+      </div>
+      <div class="form-group">
+        <label for="documentType">Tipo de Documento:</label>
+        <select id="documentType" name="documentType" onchange="updateDocumentPlaceholder()">
+          <option value="cpf">CPF:</option>
+          <option value="cnpj">CNPJ:</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="documentNumber" id="documentLabel">CPF</label>
+        <input type="text" id="documentNumber" name="documentNumber" required>
+      </div>
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" maxlength="100" required>
+      </div>
+      <div class="form-group">
+        <label for="razaoSocial">Razão Social:</label>
+        <input type="text" id="razaoSocial" name="razaoSocial" maxlength="100">
+      </div>
+      <div class="divider"></div>
+      <h3>Contatos</h3>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" maxlength="70" required>
+      </div>
+      <div class="form-group">
+        <label for="telefone1">Telefone 1:</label>
+        <input type="text" id="telefone1" name="telefone1" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}" required>
+      </div>
+      <div class="form-group">
+        <label for="telefone2">Telefone 2:</label>
+        <input type="text" id="telefone2" name="telefone2" maxlength="15" pattern="\(\d{2}\) \d{4,5}-\d{4}">
+      </div>
+      <div class="divider"></div>
+      <h3>Endereço</h3>
+      <div class="form-group">
+        <label for="rua">Rua/Avenida:</label>
+        <input type="text" id="rua" name="rua" maxlength="100" required>
+      </div>
+      <div class="form-group">
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" maxlength="10" required>
+      </div>
+      <div class="form-group">
+        <label for="bairro">Bairro:</label>
+        <input type="text" id="bairro" name="bairro" maxlength="40" required>
+      </div>
+      <div class="form-group">
+        <label for="complemento">Complemento:</label>
+        <input type="text" id="complemento" name="complemento" maxlength="100">
+      </div>
+      <div class="form-group">
+        <label for="cidade">Cidade:</label>
+        <input type="text" id="cidade" name="cidade" maxlength="100" required>
+      </div>
+      <div class="form-group">
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" maxlength="9" pattern="\d{5}-\d{3}" required>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <select id="estado" name="estado" required>
+          <option value="">Selecione...</option>
+          <option value="AC">Acre</option>
+          <option value="AL">Alagoas</option>
+          <option value="AP">Amapá</option>
+          <option value="AM">Amazonas</option>
+          <option value="BA">Bahia</option>
+          <option value="CE">Ceará</option>
+          <option value="DF">Distrito Federal</option>
+          <option value="ES">Espírito Santo</option>
+          <option value="GO">Goiás</option>
+          <option value="MA">Maranhão</option>
+          <option value="MT">Mato Grosso</option>
+          <option value="MS">Mato Grosso do Sul</option>
+          <option value="MG">Minas Gerais</option>
+          <option value="PA">Pará</option>
+          <option value="PB">Paraíba</option>
+          <option value="PR">Paraná</option>
+          <option value="PE">Pernambuco</option>
+          <option value="PI">Piauí</option>
+          <option value="RJ">Rio de Janeiro</option>
+          <option value="RN">Rio Grande do Norte</option>
+          <option value="RS">Rio Grande do Sul</option>
+          <option value="RO">Rondônia</option>
+          <option value="RR">Roraima</option>
+          <option value="SC">Santa Catarina</option>
+          <option value="SP">São Paulo</option>
+          <option value="SE">Sergipe</option>
+          <option value="TO">Tocantins</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button type="submit" class="save">Salvar</button>
+        <button type="reset" class="clear">Limpar</button>
+        <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+      </div>
+    </form>
+  
+    <script>
+      // Preenchimento automático de ID Cliente
+      document.getElementById('idCliente').value = 'AUTO_GENERATED_ID';
+  
+      // Atualiza o placeholder do documento com base na seleção
+      function updateDocumentPlaceholder() {
+        const documentType = document.getElementById('documentType').value;
+        const documentLabel = document.getElementById('documentLabel');
+        const documentNumber = document.getElementById('documentNumber');
+  
+        if (documentType === 'cpf') {
+          documentLabel.innerText = 'CPF';
+          documentNumber.placeholder = '000.000.000-00';
+          documentNumber.pattern = '\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}';
+        } else {
+          documentLabel.innerText = 'CNPJ';
+          documentNumber.placeholder = '00.000.000/0000-00';
+          documentNumber.pattern = '\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}';
+        }
+      }
+  
+      // Máscaras de entrada para telefones e CEP
+      document.getElementById('telefone1').addEventListener('input', function (e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+      });
+  
+      document.getElementById('telefone2').addEventListener('input', function (e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+        e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+      });
+  
+      document.getElementById('cep').addEventListener('input', function (e) {
+        let x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
+        e.target.value = x[1] + (x[2] ? '-' + x[2] : '');
+      });
+  
+      // Atualiza o placeholder no carregamento inicial
+      updateDocumentPlaceholder();
+    </script>
+  </body>
+</html>

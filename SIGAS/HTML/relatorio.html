@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <!-- Usando um link absoluto para o arquivo de ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerar Relatório</title>
+</head>
+
+<body>
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown">Gerar Relatório</li>
+    </ul>
+  </nav>
+
+  <form id="gerarRelatorio" onsubmit="return false;">
+    <div class="form-group">
+      <label for="tipoRelatorio">Tipo de Relatório:</label>
+      <select id="tipoRelatorio" name="tipoRelatorio" required>
+        <option value="">Selecione...</option>
+        <option value="clientes">Clientes</option>
+        <option value="fornecedores">Fornecedores</option>
+        <option value="produtos">Produtos</option>
+        <option value="compras">Compras</option>
+        <option value="vendas">Vendas</option>
+        <option value="estoque">Estoque</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="idRelatorio">ID:</label>
+      <input type="text" id="idRelatorio" name="idRelatorio">
+    </div>
+    <div class="form-group">
+      <label for="nomeRelatorio">Nome:</label>
+      <input type="text" id="nomeRelatorio" name="nomeRelatorio">
+    </div>
+    <div class="form-group">
+      <label for="dataDe">De:</label>
+      <input type="text" id="dataDe" name="dataDe" placeholder="dd/mm/aaaa" pattern="\d{2}/\d{2}/\d{4}">
+    </div>
+    <div class="form-group">
+      <label for="dataA">Até:</label>
+      <input type="text" id="dataA" name="dataA" placeholder="dd/mm/aaaa" pattern="\d{2}/\d{2}/\d{4}">
+    </div>
+    <div class="button-group">
+      <button type="button" class="generate" onclick="gerarRelatorio()">Gerar Relatório</button>
+    </div>
+    <div class="button-group">
+      <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+    </div>
+  </form>
+
+  <div id="resultadoRelatorio">
+    <h3>Resultado do Relatório</h3>
+    <div id="relatorioInfo"></div>
+  </div>
+
+  <script>
+    // Função para gerar o relatório (mock data)
+    function gerarRelatorio() {
+      const tipoRelatorio = document.getElementById('tipoRelatorio').value;
+      const idRelatorio = document.getElementById('idRelatorio').value;
+      const nomeRelatorio = document.getElementById('nomeRelatorio').value;
+      const dataDe = document.getElementById('dataDe').value;
+      const dataA = document.getElementById('dataA').value;
+      let relatorioInfo = document.getElementById('relatorioInfo');
+
+      // Mock data para diferentes tipos de relatórios
+      const dados = {
+        clientes: [
+          { id: '1', nome: 'João Silva', email: 'joao.silva@example.com', telefone: '(11) 99999-9999' },
+          { id: '2', nome: 'Maria Oliveira', email: 'maria.oliveira@example.com', telefone: '(21) 77777-7777' }
+        ],
+        fornecedores: [
+          { id: '1', nome: 'Fornecedor A', email: 'fornecedor.a@example.com', telefone: '(11) 99999-9999' },
+          { id: '2', nome: 'Fornecedor B', email: 'fornecedor.b@example.com', telefone: '(21) 77777-7777' }
+        ],
+        produtos: [
+          { id: '1', nome: 'Produto A', descricao: 'Descrição do Produto A', preco: 'R$ 100,00' },
+          { id: '2', nome: 'Produto B', descricao: 'Descrição do Produto B', preco: 'R$ 200,00' }
+        ],
+        compras: [
+          { id: '1', fornecedor: 'Fornecedor A', produto: 'Produto A', quantidade: '10', data: '01/01/2024' },
+          { id: '2', fornecedor: 'Fornecedor B', produto: 'Produto B', quantidade: '20', data: '02/01/2024' }
+        ],
+        vendas: [
+          { id: '1', cliente: 'João Silva', produto: 'Produto A', quantidade: '5', data: '01/01/2024' },
+          { id: '2', cliente: 'Maria Oliveira', produto: 'Produto B', quantidade: '10', data: '02/01/2024' }
+        ]
+      };
+
+      // Selecionar dados com base no tipo de relatório
+      const relatorioDados = dados[tipoRelatorio] || [];
+
+      // Filtrar dados com base no ID, nome e datas
+      const resultado = relatorioDados.filter(item => {
+        const matchId = idRelatorio ? item.id === idRelatorio : true;
+        const matchNome = nomeRelatorio ? item.nome.toLowerCase().includes(nomeRelatorio.toLowerCase()) : true;
+        const matchData = (dataDe && dataA) ? new Date(item.data.split('/').reverse().join('-')) >= new Date(dataDe.split('/').reverse().join('-')) && new Date(item.data.split('/').reverse().join('-')) <= new Date(dataA.split('/').reverse().join('-')) : true;
+        return matchId && matchNome && matchData;
+      });
+
+      // Exibir informações do relatório gerado
+      if (resultado.length > 0) {
+        relatorioInfo.innerHTML = resultado.map(item => `
+          <p>ID: ${item.id}</p>
+          <p>Nome: ${item.nome || item.fornecedor || item.cliente}</p>
+          <p>Email: ${item.email || ''}</p>
+          <p>Telefone: ${item.telefone || ''}</p>
+          <p>Descrição: ${item.descricao || ''}</p>
+          <p>Preço: ${item.preco || ''}</p>
+          <p>Quantidade: ${item.quantidade || ''}</p>
+          <p>Data: ${item.data || ''}</p>
+          <hr>
+        `).join('');
+      } else {
+        relatorioInfo.innerHTML = '<p>Nenhum dado encontrado.</p>';
+      }
+    }
+  </script>
+</body>
+
+</html>

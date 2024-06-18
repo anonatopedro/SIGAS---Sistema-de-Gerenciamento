@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <!-- Usando um link absoluto para o arquivo de ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Venda</title>
+</head>
+
+<body>
+
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown"> Cadastro de Vendas </li>
+    </ul>
+  </nav>
+
+
+    <form id="cadastroVenda">
+      <div class="form-group">
+        <label for="idVenda">ID Venda:</label>
+        <input type="text" id="idVenda" name="idVenda" readonly>
+      </div>
+      <div class="form-group">
+        <label for="idCliente">ID Cliente:</label>
+        <input type="text" id="idCliente" name="idCliente">
+        <button type="button" class="save" onclick="pesquisarCliente()">Pesquisar Cliente</button>
+      </div>
+      <div class="button-group">
+        <button type="button" class="clear" onclick="limpar()">Limpar</button>
+        <button type="button" class="cancel" onclick="cancelar()">Cancelar</button>
+      </div>
+      <div class="divider"></div>
+      <div class="form-group">
+        <label for="idProduto">ID Produto:</label>
+        <input type="text" id="idProduto" name="idProduto">
+        <button type="button" class="save" onclick="pesquisarProduto()">Pesquisar Produto</button>
+      </div>
+      <div class="form-group">
+        <label for="produto">Produto:</label>
+        <input type="text" id="produto" name="produto"><br>
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" id="quantidade" name="quantidade">
+      </div>
+      <div class="button-group">
+        <button type="button" class="save" onclick="adicionarProduto()">Adicionar Produto</button>
+        <button type="button" class="cancel" onclick="removerProduto()">Remover Produto</button>
+      </div>
+      <div class="table-group">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Produto</th>
+              <th>Nome Produto</th>
+              <th>Quantidade</th>
+              <th>Valor Unitário</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaProdutos">
+            <!-- Os produtos adicionados serão inseridos aqui -->
+          </tbody>
+        </table>
+      </div>
+      <div class="form-group">
+        <label for="total">Total:</label>
+        <input type="text" id="total" name="total" readonly>
+      </div>
+      <div class="button-group">
+        <button type="button" class="save" onclick="salvarVenda()">Salvar Venda</button>
+      </div>
+      <div class="button-group">
+        <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+      </div>
+    </form>
+  
+    <script scr="vendas.js">
+      function pesquisarCliente() {
+        // Função para pesquisar cliente
+      }
+  
+      function limpar() {
+        document.getElementById('cadastroVenda').reset();
+      }
+  
+      function cancelar() {
+        window.location.href = 'inicio.html';
+      }
+  
+      function adicionarProduto() {
+        const idProduto = document.getElementById('idProduto').value;
+        const produto = document.getElementById('produto').value;
+        const quantidade = document.getElementById('quantidade').value;
+        const valorUnitario = 10.0; // Valor unitário fictício
+        const subtotal = quantidade * valorUnitario;
+  
+        const tabela = document.getElementById('tabelaProdutos');
+        const row = tabela.insertRow();
+        row.insertCell(0).innerText = idProduto;
+        row.insertCell(1).innerText = produto;
+        row.insertCell(2).innerText = quantidade;
+        row.insertCell(3).innerText = valorUnitario.toFixed(2);
+        row.insertCell(4).innerText = subtotal.toFixed(2);
+  
+        atualizarTotal();
+      }
+  
+      function removerProduto() {
+        const tabela = document.getElementById('tabelaProdutos');
+        if (tabela.rows.length > 0) {
+          tabela.deleteRow(tabela.rows.length - 1);
+          atualizarTotal();
+        }
+      }
+  
+      function atualizarTotal() {
+        const tabela = document.getElementById('tabelaProdutos');
+        let total = 0;
+        for (let i = 0; i < tabela.rows.length; i++) {
+          total += parseFloat(tabela.rows[i].cells[4].innerText);
+        }
+        document.getElementById('total').value = total.toFixed(2);
+      }
+  
+      function salvarVenda() {
+        // Função para salvar venda
+        alert('Venda salva com sucesso!');
+      }
+    </script>
+  </body>
+  </html>

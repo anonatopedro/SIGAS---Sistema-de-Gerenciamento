@@ -1,0 +1,201 @@
+/* Importar a fonte Poppins do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* Reset de estilos para todos os elementos */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos para o corpo da página */
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #818b37;
+  padding: 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Estilos para o contêiner principal */
+.container {
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  background: #fff;
+  padding: 40px 30px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  perspective: 2700px;
+}
+
+/* Estilos para a capa do contêiner */
+.container .cover {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 50%;
+  z-index: 98;
+  transition: all 1s ease;
+  transform-origin: left;
+  transform-style: preserve-3d;
+}
+
+/* Estilos para a frente da capa */
+.container .cover .front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Estilos para a imagem da capa */
+.container .cover img {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  z-index: 10;
+}
+
+/* Estilos para o formulário de login */
+.form-content .login-form {
+  width: calc(100% / 2 - 25px);
+}
+
+/* Estilos para o título dos formulários */
+.form-content .title {
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Estilos para as caixas de entrada dos formulários */
+.form-content .input-boxes {
+  margin-top: 30px;
+}
+
+/* Estilos para cada caixa de entrada dos formulários */
+.form-content .input-box {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  margin: 10px 0;
+  position: relative;
+}
+
+/* Estilos para a entrada de texto dos formulários */
+.form-content .input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Estilos para a entrada de texto focada ou válida */
+.form-content .input-box input:focus,
+.form-content .input-box input:valid {
+  border-color: #5e341a;
+}
+
+/* Estilos para o ícone das caixas de entrada */
+.form-content .input-box i {
+  position: absolute;
+  color: #5e341a;
+  font-size: 17px;
+}
+
+/* Estilos para o texto dos formulários */
+.form-content .text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Estilos para os links nos textos dos formulários */
+.form-content .text a {
+  text-decoration: none;
+}
+
+/* Estilos para o efeito hover nos links dos textos dos formulários */
+.form-content .text a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para o botão dos formulários */
+.form-content .button {
+  color: #fff;
+  margin-top: 40px;
+}
+
+/* Estilos para o input do botão dos formulários */
+.form-content .button input {
+  color: #fff;
+  background: #5e341a;
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+/* Estilos para o efeito hover no botão dos formulários */
+.form-content .button input:hover {
+  background: #7c4e31;
+}
+
+/* Estilos para as etiquetas dos formulários */
+.form-content label {
+  color: #007441;
+  cursor: pointer;
+}
+
+/* Estilos para o efeito hover nas etiquetas dos formulários */
+.form-content label:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para o link do botão */
+.button-link {
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fff;
+  background: #5e341a;
+  border-radius: 6px;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Estilos para o efeito hover no link do botão */
+.button-link:hover {
+  background: #7c4e31;
+}
+
+
+/* Estilos para a responsividade em telas menores */
+@media (max-width: 730px) {
+  /* Ocultar a capa em telas menores */
+  .container .cover {
+    display: none;
+  }
+  
+  /* Ajustar a largura do formulário de login em telas menores */
+  .form-content .login-form {
+    width: 100%;
+  }
+}

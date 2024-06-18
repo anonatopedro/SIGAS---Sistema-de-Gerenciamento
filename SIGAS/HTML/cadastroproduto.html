@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Produto</title>
+</head>
+
+<body>
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown">Cadastro de Produtos</li>
+    </ul>
+  </nav>
+
+  <form id="cadastroProduto">
+    <div class="form-group">
+      <label for="idProduto">ID Produto:</label>
+      <input type="text" id="idProduto" name="idProduto" readonly>
+    </div>
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" maxlength="100" required>
+    </div>
+    <div class="form-group">
+      <label for="descricao">Descrição:</label>
+      <textarea rows="5" cols="86" id="descricao" name="descricao" maxlength="3500" required></textarea>
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoria:</label>
+      <select id="categoria" name="categoria" required>
+        <option value="">Selecione...</option>
+        <option value="rape">Rapé</option>
+        <option value="guia">Guia/Santo-cruzeiro</option>
+        <option value="fitoterapicos">Fitoterápicos</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="preco">Preço Unitário:</label>
+      <input type="number" id="preco" name="preco" step="0.01" required>
+    </div>
+    <div class="form-group">
+      <label for="fkFornecedor">Fornecedor:</label>
+      <input type="text" id="fkFornecedor" name="fkFornecedor" required>
+      <button type="button" class="save" onclick="pesquisarFornecedor()">Pesquisar Fornecedor</button>
+    </div>
+    <div class="form-group">
+      <label for="qtdEstoque">Quantidade em Estoque:</label>
+      <input type="number" id="qtdEstoque" name="qtdEstoque" required>
+    </div>
+    <div class="button-group">
+      <button type="submit" class="save">Salvar</button>
+      <button type="reset" class="clear">Limpar</button>
+      <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+    </div>
+  </form>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

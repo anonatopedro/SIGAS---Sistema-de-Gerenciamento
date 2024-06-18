@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Compra</title>
+</head>
+
+<body>
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown">Registro de Compras</li>
+    </ul>
+  </nav>
+
+  <form id="registroCompra">
+    <div class="form-group">
+      <label for="idCompra">ID Compra:</label>
+      <input type="text" id="idCompra" name="idCompra" readonly>
+    </div>
+    <div class="form-group">
+      <label for="dataCompra">Data da Compra:</label>
+      <input type="date" id="dataCompra" name="dataCompra" required>
+    </div>
+    <div class="form-group">
+      <label for="fkFornecedor">Fornecedor:</label>
+      <input type="text" id="fkFornecedor" name="fkFornecedor" list="fornecedores" required>
+      <button type="button" class="save" onclick="pesquisarFornecedor()">Pesquisar Fornecedor</button>
+      <datalist id="fornecedores">
+        <!-- As opções serão preenchidas dinamicamente via JavaScript -->
+      </datalist>
+    </div>
+    <div class="form-group">
+      <label for="fkProduto">Produto:</label>
+      <input type="text" id="fkProduto" name="fkProduto" list="produtos" required>
+      <button type="button" class="save" onclick="pesquisarProduto()">Pesquisar Produto</button>
+      <datalist id="produtos">
+        <!-- As opções serão preenchidas dinamicamente via JavaScript -->
+      </datalist>
+    </div>
+    <div class="form-group">
+      <label for="qtdProduto">Quantidade do Produto:</label>
+      <input type="number" id="qtdProduto" name="qtdProduto" required>
+    </div>
+    <div class="form-group">
+      <label for="totalCompra">Total da Compra:</label>
+      <input type="number" id="totalCompra" name="totalCompra" step="0.01" required>
+    </div>
+    <div class="button-group">
+      <button type="submit" class="save">Salvar</button>
+      <button type="reset" class="clear">Limpar</button>
+      <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+    </div>
+  </form>
+</body>
+
+</html>

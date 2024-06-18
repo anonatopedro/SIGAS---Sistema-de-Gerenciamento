@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <!-- Usando um link absoluto para o arquivo de ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Fornecedor</title>
+</head>
+
+<body>
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown">Consulta de Fornecedores</li>
+    </ul>
+  </nav>
+
+  <form id="consultaFornecedor" onsubmit="return false;">
+    <div class="form-group">
+      <label for="consultaIdFornecedor">ID Fornecedor:</label>
+      <input type="text" id="consultaIdFornecedor" name="consultaIdFornecedor">
+    </div>
+    <div class="form-group">
+      <label for="consultaNomeFornecedor">Nome:</label>
+      <input type="text" id="consultaNomeFornecedor" name="consultaNomeFornecedor">
+    </div>
+    <div class="button-group">
+      <button type="button" class="search" onclick="consultarFornecedor()">Pesquisar</button>
+    </div>
+    <div class="button-group">
+        <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+    </div>
+  </form>
+
+  <div id="resultadoConsulta">
+    <h3>Resultado da Consulta</h3>
+    <div id="fornecedorInfo"></div>
+  </div>
+
+  <script>
+    // Função para consultar o fornecedor (mock data)
+    function consultarFornecedor() {
+      const idFornecedor = document.getElementById('consultaIdFornecedor').value;
+      const nome = document.getElementById('consultaNomeFornecedor').value;
+      let fornecedorInfo = document.getElementById('fornecedorInfo');
+
+      // Mock data de fornecedores
+      const fornecedores = [
+        {
+          id: '1',
+          nome: 'Fornecedor A',
+          email: 'fornecedor.a@example.com',
+          telefone: '(11) 99999-9999',
+          endereco: 'Rua A, 123, Bairro B, Cidade C, SP, 12345-678'
+        },
+        {
+          id: '2',
+          nome: 'Fornecedor B',
+          email: 'fornecedor.b@example.com',
+          telefone: '(21) 77777-7777',
+          endereco: 'Avenida X, 456, Bairro Y, Cidade Z, RJ, 98765-432'
+        }
+      ];
+
+      // Filtrar fornecedores com base no ID ou nome
+      const fornecedor = fornecedores.find(f => f.id === idFornecedor || f.nome.toLowerCase() === nome.toLowerCase());
+
+      // Exibir informações do fornecedor encontrado ou mensagem de erro
+      if (fornecedor) {
+        fornecedorInfo.innerHTML = `
+          <p>ID: ${fornecedor.id}</p>
+          <p>Nome: ${fornecedor.nome}</p>
+          <p>Email: ${fornecedor.email}</p>
+          <p>Telefone: ${fornecedor.telefone}</p>
+          <p>Endereço: ${fornecedor.endereco}</p>
+        `;
+      } else {
+        fornecedorInfo.innerHTML = '<p>Fornecedor não encontrado.</p>';
+      }
+    }
+  </script>
+</body>
+
+</html>

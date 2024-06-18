@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/geral.css">
+  <!-- Usando um link absoluto para o arquivo de ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="shortcut icon" href="img/ArteSagrada.png" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta Cliente</title>
+</head>
+
+<body>
+  <nav id="cabecalho">
+    <ul>
+      <li class="dropdown">Consulta de Clientes</li>
+    </ul>
+  </nav>
+
+  <form id="consultaCliente" onsubmit="return false;">
+    <div class="form-group">
+      <label for="consultaIdCliente">ID Cliente:</label>
+      <input type="text" id="consultaIdCliente" name="consultaIdCliente">
+    </div>
+    <div class="form-group">
+      <label for="consultaNome">Nome:</label>
+      <input type="text" id="consultaNome" name="consultaNome">
+    </div>
+    <div class="button-group">
+      <button type="button" class="search" onclick="consultarCliente()">Pesquisar</button>
+    </div>
+    <div class="button-group">
+        <button type="button" class="cancel" onclick="window.location.href='inicio.html'">Cancelar</button>
+    </div>
+  </form>
+
+  <div id="resultadoConsulta">
+    <h3>Resultado da Consulta</h3>
+    <div id="clienteInfo"></div>
+  </div>
+
+  <script>
+    // Função para consultar o cliente (mock data)
+    function consultarCliente() {
+      const idCliente = document.getElementById('consultaIdCliente').value;
+      const nome = document.getElementById('consultaNome').value;
+      let clienteInfo = document.getElementById('clienteInfo');
+
+      // Mock data de clientes
+      const clientes = [
+        {
+          id: '1',
+          nome: 'João Silva',
+          email: 'joao.silva@example.com',
+          telefone1: '(11) 99999-9999',
+          telefone2: '(11) 88888-8888',
+          endereco: 'Rua A, 123, Bairro B, Cidade C, SP, 12345-678'
+        },
+        {
+          id: '2',
+          nome: 'Maria Oliveira',
+          email: 'maria.oliveira@example.com',
+          telefone1: '(21) 77777-7777',
+          telefone2: '(21) 66666-6666',
+          endereco: 'Avenida X, 456, Bairro Y, Cidade Z, RJ, 98765-432'
+        }
+      ];
+
+      // Filtrar clientes com base no ID ou nome
+      const cliente = clientes.find(c => c.id === idCliente || c.nome.toLowerCase() === nome.toLowerCase());
+
+      // Exibir informações do cliente encontrado ou mensagem de erro
+      if (cliente) {
+        clienteInfo.innerHTML = `
+          <p>ID: ${cliente.id}</p>
+          <p>Nome: ${cliente.nome}</p>
+          <p>Email: ${cliente.email}</p>
+          <p>Telefone 1: ${cliente.telefone1}</p>
+          <p>Telefone 2: ${cliente.telefone2}</p>
+          <p>Endereço: ${cliente.endereco}</p>
+        `;
+      } else {
+        clienteInfo.innerHTML = '<p>Cliente não encontrado.</p>';
+      }
+    }
+  </script>
+</body>
+
+</html>
